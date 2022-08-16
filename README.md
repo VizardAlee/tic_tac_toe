@@ -12,7 +12,7 @@
 Is a grid comprised of 9 squares grouped in 3s
 </p>
 
-<h3>Players/h3>
+<h3>Players</h3>
 <p>
 The game is between two players
 </p>
