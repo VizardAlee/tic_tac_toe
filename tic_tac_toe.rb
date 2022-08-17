@@ -4,6 +4,7 @@ require 'pry-byebug'
 
 # creating board
 board = ['', '', '', '', '', '', '', '', '']
+index = gets.chomp.to_i
 
 def board_layout(board)
   puts "  #{board[0]} | #{board[1]} | #{board[2]} "
@@ -13,4 +14,10 @@ def board_layout(board)
   puts "  #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-board_layout(board)
+def move(board, index, player = 'X')
+  puts 'Choose your spot!'
+  board[index] = player
+  board_layout(board)
+end
+
+move(board, index)
