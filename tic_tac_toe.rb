@@ -25,78 +25,19 @@ end
 def better_input
   gets.chomp.to_i - 1
 end
-=begin
-# payer1 method
-def player1(player1 = 'X')
-  board_layout
-  until position_taken?
-
-    puts "choose a spot Mr. #{player1}"
-    @board[better_input] = player1
-  end
-  puts 'not so fast'
-  
- # unless position_taken?
-end
-
-# player2 method
-def player2(player2 = 'O')
-  board_layout
-  until position_taken?
-    puts "choose a spot Mr. #{player2}"
-    @board[better_input] = player2
-  end
-  puts 'not so fast'
- # return player2 unless position_taken? 
-end
-
-# if board is full
-def full?
-  @board.all? { |element| element == 'X'  || element == 'O'}
-end
 
 # find free positions
-def position_taken?
-  if @board[player1].include?('X') || @board[player1].include?('O') || @board[player2].incude?('X') || @board[player2].include?('O')
-    puts 'Position taken!'
-  end
-end
 
-# puts position_taken?
-
-def game
-  loop do
-    # until position_taken?
-    if player1
-      player2
-    elsif player2
-      player1
-    end
-    # end
-  end
-end
-
-p game
-=end
-
-def taken?
-=begin
+def taken?(index)
   if @board[index] == '' || @board[index] == ' ' || @board[index] == nil
     return false
   else
     return true
   end
 end
-=end
-  @board.each do |index|
-    if index == '' || index == ' ' || index == nil
-      return false
-    else
-      return true
-    end
-  end
-end
 
+
+# check if the board is full
 def full?
   if @board.include?('') || @board.include?(' ') || @board.include?(nil)
     return false
@@ -105,20 +46,35 @@ def full?
   end
 end
 
+# player1 move
 def player1
-  @board[better_input] = 'X'
-  board_layout
+  puts 'Check if spot is taken'
+  if taken?(better_input)
+    puts 'Spot taken'
+  else
+    puts 'spot not taken, make a move'
+    @board[better_input] = 'X'
+    board_layout
+  end
 end
 
+# player2 move
 def player2
-  @board[better_input] = 'O'
-  board_layout
+  puts 'Check if spot is taken'
+  if taken?(better_input)
+    puts 'Spot taken'
+  else
+    puts 'spot not taken, make a move'
+    @board[better_input] = 'O'
+    board_layout
+  end
 end
 
 def player
   loop do
     if full?
       puts 'No more move!'
+      break
     end
     if player1
       player2
@@ -126,12 +82,6 @@ def player
       player1
     end
   end
-end
-
-def play
-  board_layout
-  puts 'Choose your spot'
-  player
 end
 
 puts player
