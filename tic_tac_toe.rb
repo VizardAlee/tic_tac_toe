@@ -64,16 +64,6 @@ end
 =end
 
 # play game
-player1 = 'X'
-player2 = 'O'
-
-def turn(player1, player2)
-  if player1
-    player2
-  elsif player2
-    player1
-  end
-end
 
 def play(board, player1, player2)
   moves = 9
@@ -86,4 +76,28 @@ def play(board, player1, player2)
   end
 end
 
-play(board, player1, player2)
+# play(board, player1, player2)
+
+def player1(board)
+  player1 = 'x'
+  board[gets.chomp.to_i] = player1
+  board_layout(board)
+end
+
+def player2(board)
+  player2 = 'O'
+  board[gets.chomp.to_i] = player2
+  board_layout(board)
+end
+
+def test(board)
+  while board.include?('')
+    if player1(board)
+      player2(board)
+    elsif player2(board)
+      player1(board)
+    end
+  end
+end
+
+test(board)
