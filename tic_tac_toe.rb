@@ -52,7 +52,7 @@ def o_win?(board)
   elsif board[2] == 'O' && board[5] == 'O' && board[8] == 'O'
     true
   else
-    false
+    'It is a Draw! Retry!'
   end
 end
 
@@ -63,11 +63,14 @@ def win?(board)
   elsif o_win?(board) == true
     'O marker wins!'
   else
-    'no winner yet'
+    'It is a Draw! Retry!'
   end
 end
 
-# win?(board)
+# find out if position is taken
+def position_taken?(board)
+  
+end
 
 # displays board layout
 def board_layout(board)
@@ -145,17 +148,29 @@ end
 
 def player1(board)
   player1 = 'X'
-  board[gets.chomp.to_i] = player1
+  move = gets.chomp.to_i
+  if board[move] == ''
+    board[move] = player1
+  else
+    puts 'position taken, try again'
+  end
   board_layout(board)
   # x_win?(board)
 end
 
 def player2(board)
   player2 = 'O'
-  board[gets.chomp.to_i] = player2
+  move = gets.chomp.to_i
+  if board[move] == ''
+    board[move] = player2
+  else
+    puts 'position taken, try again'
+  end
   board_layout(board)
   # o_win?(board)
 end
+
+# player2(board)
 
 def move(board)
   until win?(board) == 'X marker wins!' || win?(board) == 'O marker wins!' || board.include?('') == false
@@ -164,7 +179,7 @@ def move(board)
     elsif player2(board)
       player1(board)
     end
-    win?(board)
   end
+  p win?(board)
 end
 move(board)
