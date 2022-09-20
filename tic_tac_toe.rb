@@ -67,8 +67,9 @@ def win?(board)
   end
 end
 
-p win?(board)
+# win?(board)
 
+# displays board layout
 def board_layout(board)
   puts "  #{board[0]}  |  #{board[1]}  |  #{board[2]}  "
   puts '- - -+- - -+- - -'
@@ -127,7 +128,7 @@ end
 =end
 
 # play game
-
+=begin
 def play(board, player1, player2)
   moves = 9
 
@@ -138,27 +139,32 @@ def play(board, player1, player2)
     moves -= 1
   end
 end
+=end
 
 # play(board, player1, player2)
 
 def player1(board)
-  player1 = 'x'
+  player1 = 'X'
   board[gets.chomp.to_i] = player1
   board_layout(board)
+  # x_win?(board)
 end
 
 def player2(board)
   player2 = 'O'
   board[gets.chomp.to_i] = player2
   board_layout(board)
+  # o_win?(board)
 end
 
-def test(board)
-  while board.include?('')
+def move(board)
+  until win?(board) == 'X marker wins!' || win?(board) == 'O marker wins!' || board.include?('') == false
     if player1(board)
       player2(board)
     elsif player2(board)
       player1(board)
     end
+    win?(board)
   end
 end
+move(board)
