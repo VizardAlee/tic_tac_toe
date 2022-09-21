@@ -4,7 +4,7 @@
 # create a player
 
 # board and it's layout
-board = ['', '', '', '', '', '', '', '', '']
+board = ['X', '', '', '', '', '', '', '', '']
 
 # using this to just visualize the positions
 WIN_COMBO = [
@@ -67,11 +67,6 @@ def win?(board)
   end
 end
 
-# find out if position is taken
-def position_taken?(board)
-  
-end
-
 # displays board layout
 def board_layout(board)
   puts "  #{board[0]}  |  #{board[1]}  |  #{board[2]}  "
@@ -98,86 +93,50 @@ def player_O
   Player.new('O')
 end
 
-=begin
-def choose_player
-  puts 'player X or O?:'
-  player = ''
-  valid_char = false
-
-  while valid_char == false
-    player = gets.chomp.upcase
-
-    if player == 'X'
-      player1 = Player.new('X')
-      puts "Player one marker #{player1.name} confirmed"
-      player2 = Player.new('O')
-      puts "Player two marker #{player2.name} confirmed"
-      puts "Let's begin"
-      valid_char = true
-    elsif player == 'O'
-      player1 = Player.new('O')
-      puts "Player one marker #{player1.name} confirmed"
-      player2 = Player.new('X')
-      puts "Player two marker #{player2.name} confirmed"
-      puts "Let's begin"
-      valid_char = true
+# find out if position is taken
+def position_taken?(board, player, move)
+  while board[move] == ''
+    if board[move] == ''
+      board[move] = player
     else
-      puts "#{player} is not a valid input"
-      puts 'Gotta be X or O'
-      valid_char = false
+      puts 'Position taken! Try again'
+      return
     end
+    board_layout(board)
   end
 end
-=end
+# move = gets.chomp.to_i
+# player = 'X'
 
-# play game
-=begin
-def play(board, player1, player2)
-  moves = 9
-
-  while moves.positive?
-    board_layout(board)
-    board[gets.chomp.to_i] = turn(player1, player2)
-    board_layout(board)
-    moves -= 1
-  end
-end
-=end
+# position_taken?(board, player, move)
 
 # play(board, player1, player2)
 
 def player1(board)
   player1 = 'X'
   move = gets.chomp.to_i
-  if board[move] == ''
-    board[move] = player1
-  else
-    puts 'position taken, try again'
-  end
+  position_taken?(board, player1, move)
   board_layout(board)
-  # x_win?(board)
 end
+
+# player1(board)
 
 def player2(board)
   player2 = 'O'
   move = gets.chomp.to_i
-  if board[move] == ''
-    board[move] = player2
-  else
-    puts 'position taken, try again'
-  end
+  position_taken?(board, player2, move)
   board_layout(board)
-  # o_win?(board)
 end
 
 # player2(board)
 
 def move(board)
+  puts 'Begin!'
   until win?(board) == 'X marker wins!' || win?(board) == 'O marker wins!' || board.include?('') == false
     if player1(board)
-      player2(board)
-    elsif player2(board)
       player1(board)
+    elsif player2(board)
+      player2(board)
     end
   end
   p win?(board)
