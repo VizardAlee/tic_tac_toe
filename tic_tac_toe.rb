@@ -4,7 +4,7 @@
 # create a player
 
 # board and it's layout
-board = ['X', '', '', '', '', '', '', '', '']
+board = ['', '', '', '', '', '', '', '', '']
 
 # using this to just visualize the positions
 WIN_COMBO = [
@@ -95,14 +95,10 @@ end
 
 # find out if position is taken
 def position_taken?(board, player, move)
-  while board[move] == ''
-    if board[move] == ''
-      board[move] = player
-    else
-      puts 'Position taken! Try again'
-      return
-    end
-    board_layout(board)
+  if board[move] == ''
+    board[move] = player
+  else
+    puts "Oops! Position taken! Try Again!"
   end
 end
 # move = gets.chomp.to_i
