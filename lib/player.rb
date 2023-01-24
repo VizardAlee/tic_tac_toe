@@ -1,8 +1,11 @@
 # frozen_string_literal: false
 
 require_relative 'board'
+require_relative 'play_module'
+
 # player class
 class Player
+  include Play
   attr_accessor :name1, :name2, :player1, :player2
   attr_reader :marker
 
@@ -28,12 +31,16 @@ class Player
     puts "Let's Goooo!!!"
   end
 
-  def player1_move(board)
-    board[gets.chomp.to_i] = @player1
+  def player1_move(board, move = [])
+    move << place
+    move = move.join.to_i - 1
+    move_valid?(move, board) ? board[move] = @player1 : false
   end
 
-  def player2_move(board)
-    board[gets.chomp.to_i] = @player2
+  def player2_move(board, move = [])
+    move << place
+    move = move.join.to_i - 1
+    move_valid?(move, board) ? board[move] = @player2 : false
   end
 
   def place

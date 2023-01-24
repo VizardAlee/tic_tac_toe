@@ -17,12 +17,4 @@ class Board
     puts '- --+- --+-- -'
     puts "  #{@board[6]}  |  #{@board[7]}  |  #{@board[8]}  "
   end
-
-  def position_vacant?(spot)
-    @board[spot].empty?
-  end
-
-  def move_valid?(spot)
-    @board[spot].empty? || spot >= 0 && spot <= 8 ? true : false
-  end
 end
