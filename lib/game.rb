@@ -62,4 +62,9 @@ class Game
       puts "#{@gamer.name2} Wins!! Game Over"
     end
   end
+
+  def begin
+    choose_player
+    turn
+  end
 end
